@@ -1,7 +1,0 @@
-E:\Project\cpp-study\BullCowGame\Intermediate\Build\Win64\UE4Editor\Development\BullCowGame\Definitions.BullCowGame.h
-e:\project\cpp-study\bullcowgame\source\bullcowgame\BullCowGameGameModeBase.h
-E:\Unreal Engine\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/GameModeBase.h
-E:\Unreal Engine\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine/ServerStatReplicator.h
-E:\Unreal Engine\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ServerStatReplicator.generated.h
-E:\Unreal Engine\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameModeBase.generated.h
-E:\Project\cpp-study\BullCowGame\Intermediate\Build\Win64\UE4Editor\Inc\BullCowGame\BullCowGameGameModeBase.generated.h

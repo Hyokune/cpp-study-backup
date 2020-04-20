@@ -1,2 +1,0 @@
-E:\Project\cpp-study\BullCowGame\Intermediate\Build\Win64\UE4Editor\Development\BullCowGame\Definitions.BullCowGame.h
-e:\project\cpp-study\bullcowgame\source\bullcowgame\BullCowGame.h
