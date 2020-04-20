@@ -1,0 +1,5 @@
+E:\Project\cpp-study\BullCowGame\Intermediate\Build\Win64\UE4Editor\Development\BullCowGame\Definitions.BullCowGame.h
+e:\project\cpp-study\bullcowgame\source\bullcowgame\BullCowCartridge.h
+e:\project\cpp-study\bullcowgame\source\bullcowgame\Console/Cartridge.h
+E:\Project\cpp-study\BullCowGame\Intermediate\Build\Win64\UE4Editor\Inc\BullCowGame\Cartridge.generated.h
+E:\Project\cpp-study\BullCowGame\Intermediate\Build\Win64\UE4Editor\Inc\BullCowGame\BullCowCartridge.generated.h
