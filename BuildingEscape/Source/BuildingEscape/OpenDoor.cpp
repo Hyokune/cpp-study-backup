@@ -1,8 +1,10 @@
 // Copyright Hyokune 2020
 
-
-#include "OpenDoor.h"
+#include "Engine/World.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/PlayerController.h"
+#include "OpenDoor.h"
+
 
 // Sets default values for this component's properties
 UOpenDoor::UOpenDoor()
@@ -20,9 +22,16 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	InitialYaw = GetOwner()->GetActorRotation().Yaw;
-  CurrentYaw = InitialYaw;
-  TargetYaw = InitialYaw + TargetYaw;
+	InitialAngle = GetOwner()->GetActorRotation().Yaw;
+  CurrentAngle = InitialAngle;
+  OpenAngle = InitialAngle + OpenAngle;
+
+  if (!PressurePlate)
+  {
+    UE_LOG(LogTemp, Error, TEXT("%s has the OpenDoor component on it, but no PressurePlate set"), *GetOwner()->GetName());
+  }
+
+  ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 
@@ -31,13 +40,40 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	FRotator CurrentRotation = GetOwner()->GetActorRotation();
-  UE_LOG(LogTemp, Warning, TEXT("%s"), *CurrentRotation.ToString());
-  UE_LOG(LogTemp, Warning, TEXT("Yaw is: %f"), CurrentRotation.Yaw);
+  if (PressurePlate && PressurePlate->IsOverlappingActor(ActorThatOpens))
+  {
+	  OpenDoor(DeltaTime);
+    DoorLastOpened = GetWorld()->GetTimeSeconds();
+  }
+  else
+  {
+    if (GetWorld()->GetTimeSeconds() - DoorLastOpened > DoorCloseDelay)
+    {
+      CloseDoor(DeltaTime);
+    }
+  }
+}
 
-  CurrentYaw = FMath::FInterpTo(CurrentYaw, TargetYaw, DeltaTime, 1.6f);
+void UOpenDoor::OpenDoor(const float& DeltaTime)
+{
+  FRotator CurrentRotation = GetOwner()->GetActorRotation();
+  // UE_LOG(LogTemp, Warning, TEXT("%s"), *CurrentRotation.ToString());
+  // UE_LOG(LogTemp, Warning, TEXT("Yaw is: %f"), CurrentRotation.Yaw);
+
+  CurrentAngle = FMath::FInterpTo(CurrentAngle, OpenAngle, DeltaTime, DoorOpenSpeed);
   FRotator DoorRotation = CurrentRotation;
-  DoorRotation.Yaw = CurrentYaw;
+  DoorRotation.Yaw = CurrentAngle;
   GetOwner()->SetActorRotation(DoorRotation);
 }
 
+void UOpenDoor::CloseDoor(const float& DeltaTime)
+{
+  FRotator CurrentRotation = GetOwner()->GetActorRotation();
+  // UE_LOG(LogTemp, Warning, TEXT("%s"), *CurrentRotation.ToString());
+  // UE_LOG(LogTemp, Warning, TEXT("Yaw is: %f"), CurrentRotation.Yaw);
+
+  CurrentAngle = FMath::FInterpTo(CurrentAngle, InitialAngle, DeltaTime, DoorCloseSpeed);
+  FRotator DoorRotation = CurrentRotation;
+  DoorRotation.Yaw = CurrentAngle;
+  GetOwner()->SetActorRotation(DoorRotation);
+}
