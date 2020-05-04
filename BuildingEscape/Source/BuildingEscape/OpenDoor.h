@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
+#include "Components/AudioComponent.h"
 #include "CoreMinimal.h"
 #include "Engine/TriggerVolume.h"
 #include "OpenDoor.generated.h"
@@ -27,6 +28,11 @@ public:
   void OpenDoor(const float& DeltaTime);
   void CloseDoor(const float& DeltaTime);
   float TotalMassOfActors() const;
+  void FindPressurePlate();
+  void FindAudioComponent();
+
+  bool OpenDoorSound = false;
+  bool CloseDoorSound = true;
 
 private:
   float InitialAngle;
@@ -51,4 +57,7 @@ private:
 
   UPROPERTY(EditAnywhere)
   ATriggerVolume* PressurePlate = nullptr;
+
+  UPROPERTY(EditAnywhere)
+  UAudioComponent* AudioComponent = nullptr;
 };
